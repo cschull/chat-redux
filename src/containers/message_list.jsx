@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import React, { Component } from 'react';
 import Message from '../components/message';
+import MessageForm from '../components/message_form';
 
 import { getMessages } from '../actions/index';
 
@@ -30,10 +31,7 @@ class MessageList extends Component {
       <div className="message-list">
         <h1>Channel#general</h1>
         {this.renderList()}
-        <form style={{display: "flex"}}>
-          <input style={{width:"80%"}} type="text" className="form-control"/>
-          <input style={{width:"20%"}} type="submit" value="send" className="form-control"/>
-        </form>
+        <MessageForm />
       </div>
     );
   }
