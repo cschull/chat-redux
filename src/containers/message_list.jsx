@@ -10,7 +10,19 @@ import { getMessages } from '../actions/index';
 class MessageList extends Component {
 
   componentWillMount() {
-    this.props.getMessages('general');
+    this.getMessages();
+  }
+
+  componentDidMount() {
+    this.refresher = setInterval(this.getMessages('general'), 5000);
+  }
+
+  componentDidUpdate() {
+    this.list.scrollTop = this.list.scrollHeight;
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refresher);
   }
 
   renderList = () => {
