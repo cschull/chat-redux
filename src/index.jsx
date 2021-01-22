@@ -10,6 +10,7 @@ import { logger } from 'redux-logger';
 
 import identityReducer from './reducers/identity_reducer';
 import getMessagesReducer from './reducers/get_messages_reducer';
+import selectChannelReducer from './reducers/select_channel_reducer';
 
 
 // internal modules
@@ -27,7 +28,7 @@ const initialState = {
 const reducers = combineReducers ({
   messages: getMessagesReducer,
   channels: identityReducer,
-  selectedChannel: identityReducer,
+  selectedChannel: selectChannelReducer,
   currentUser: identityReducer
 });
 

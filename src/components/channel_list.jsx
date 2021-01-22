@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Channel from './channel';
 
 
 class ChannelList extends Component {
 
   renderChannel = () => {
     const channels = this.props.channels.map (channel =>
-       <li className="channel" key={channel} style={{listStyleType: "none"}}>#{channel}</li>
+       <Channel key={channel} channel={channel}/>
     )
-    return channels
+    return channels;
   }
 
   render() {
@@ -28,7 +29,8 @@ class ChannelList extends Component {
 
 function mapStateToProps(state) {
   return {
-    channels: state.channels
+    channels: state.channels,
+    selectedChannel : state.selectedChannel
   };
 }
 

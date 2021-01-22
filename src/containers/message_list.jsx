@@ -10,38 +10,39 @@ import { getMessages } from '../actions/index';
 class MessageList extends Component {
 
   componentWillMount() {
-    this.getMessages();
+    this.props.getMessages(this.props.selectedChannel);
   }
 
   componentDidMount() {
-    this.refresher = setInterval(this.getMessages('general'), 5000);
+    this.refresher = setInterval(this.props.getMessages(this.props.selectedChannel), 5000);
   }
 
-  componentDidUpdate() {
-    this.list.scrollTop = this.list.scrollHeight;
-  }
+  // componentDidUpdate() {
+    // this.list.scrollTop = this.list.scrollHeight;
+  // }
 
   componentWillUnmount() {
     clearInterval(this.refresher);
   }
 
   renderList = () => {
-    const messages = this.props.messages.map( message =>
-      <Message
+    const messages = this.props.messages.filter(message =>
+      message.channel === this.props.selectedChannel);
+    const theseMessages = messages.map(message =>
+      (<Message
         author={message.author}
         content={message.content}
         date={message.created_at}
         key={message.created_at}
-      />
+      />)
     );
-    return messages;
+    return theseMessages;
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="message-list">
-        <h1>Channel#general</h1>
+        <h1>Channel#{`${this.props.selectedChannel}`}</h1>
         {this.renderList()}
         <MessageForm />
       </div>
@@ -55,7 +56,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    messages: state.messages
+    messages: state.messages,
+    selectedChannel: state.selectedChannel
   };
 }
 

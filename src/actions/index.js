@@ -1,6 +1,7 @@
 // TODO: add and export your own actions
 export const GET_MESSAGES = "GET_MESSAGES";
 export const NEW_MESSAGE = "NEW_MESSAGE";
+export const SET_CHANNEL = "SET_CHANNEL";
 
 const BASE_URL = 'https://wagon-chat.herokuapp.com';
 
@@ -34,5 +35,12 @@ export function createMessage(channel, author, content) {
   return {
     type: NEW_MESSAGE,
     payload: promise
+  };
+}
+
+export function selectChannel(channel) {
+  return {
+    type: SET_CHANNEL,
+    payload: channel
   };
 }
