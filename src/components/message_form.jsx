@@ -26,12 +26,15 @@ class MessageForm extends Component {
 
   render() {
     return (
-      <form style={{ display: "flex" }} onSubmit={this.handleSubmit}>
-        <label>
-          Send a message:
-          <input style={{ width: "80%" }} onChange={this.handleChange} type="text" value={this.state.value} className="form-control"/>
-        </label>
-        <input style={{ width: "20%" }} type="submit" value="send" className="form-control"/>
+      <form className="message-form" style={{ display: "flex", marginLeft: "40px" }} onSubmit={this.handleSubmit}>
+          <input style={{ width: "80%", marginLeft: "none" }}
+            onChange={this.handleChange}
+            type="text" value={this.state.value}
+            className="form-control" autofocus="true"/>
+        <input style={{ width: "20%", background: "red", color: "white" }}
+          type="submit"
+          value="send"
+          className="form-control"/>
       </form>
     );
   }

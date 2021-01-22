@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import React, { Component } from 'react';
+import { createRef } from 'react';
 import Message from '../components/message';
 import MessageForm from '../components/message_form';
 
@@ -14,12 +15,12 @@ class MessageList extends Component {
   }
 
   componentDidMount() {
-    this.refresher = setInterval(this.props.getMessages(this.props.selectedChannel), 5000);
+    this.refresher = setInterval(this.props.getMessages(this.props.selectedChannel), 2000);
   }
 
-  // componentDidUpdate() {
-    // this.list.scrollTop = this.list.scrollHeight;
-  // }
+  componentDidUpdate() {
+    this.list.scrollTop = this.list.scrollHeight;
+  }
 
   componentWillUnmount() {
     clearInterval(this.refresher);
@@ -41,9 +42,13 @@ class MessageList extends Component {
 
   render() {
     return (
-      <div className="message-list">
-        <h1>Channel#{`${this.props.selectedChannel}`}</h1>
-        {this.renderList()}
+      <div style={{ width: "100%" }}>
+        <h1 className="channel-title">Channel#{`${this.props.selectedChannel}`}</h1>
+        <div className="message-list"
+            ref={(list) => { this.list = list; }}
+            style={{overflow: "auto", height: "60vh", marginTop: "30px", width: "100%"}}>
+          {this.renderList()}
+        </div>
         <MessageForm />
       </div>
     );
